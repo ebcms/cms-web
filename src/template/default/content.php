@@ -10,11 +10,11 @@ $site = [
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-3 d-print-none">
             <li>当前位置：</li>
-            <li class="breadcrumb-item"><a href="{:$router->build('/')}">主页</a></li>
+            <li class="breadcrumb-item"><a href="{echo $router->build('/')}">主页</a></li>
             {foreach $category['_pitems'] as $vo}
-            {if $vo['type']!='group'}<li class="breadcrumb-item"><a href="{$router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a></li>{/if}
+            {if $vo['type']!='group'}<li class="breadcrumb-item"><a href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a></li>{/if}
             {/foreach}
-            <li class="breadcrumb-item"><a href="{$router->build('/ebcms/cms-web/category', ['id'=>$category['id']])}">{$category.title}</a></li>
+            <li class="breadcrumb-item"><a href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$category['id']])}">{$category.title}</a></li>
             <li class="breadcrumb-item active">{$content.title}</li>
         </ol>
     </nav>
@@ -47,21 +47,32 @@ $site = [
                 <div class="text-muted fs-5">（正文完）</div>
             </div>
             <div class="text-center d-print-none mb-3">
-                <a class="btn btn-outline-primary" href="{:$router->build('/')}" role="button">返回首页</a>
-                <a class="btn btn-outline-primary" href="{$router->build('/ebcms/cms-web/category', ['id'=>$category['id']])}" role="button">更多内容</a>
+                <a class="btn btn-outline-primary" href="{echo $router->build('/')}" role="button">返回首页</a>
+                <a class="btn btn-outline-primary" href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$category['id']])}" role="button">更多内容</a>
                 <button type="button" class="btn btn-outline-primary" onclick="alert('请按 ctrl+p 打印');">打印</button>
             </div>
         </div>
         <div class="col-md-3 d-print-none">
-            {if $relations=$container->get(\App\Ebcms\CmsAdmin\Model\Content::class)->getRelationContents($content['tags'])}
+            <?php
+            if ($tags = json_decode($content['tags'], true)) {
+                $relations = $db->select('ebcms_cms_content', '*', [
+                    'state' => 1,
+                    'LIMIT' => 10,
+                    'tags[~]' => $tags,
+                    'ORDER' => [
+                        'id' => 'DESC',
+                    ],
+                ]);
+            }
+            ?>
             <div class="mb-3 bg-light p-3">
                 <div class="fs-3 mb-4 border-bottom border-2 border-dark pb-2 text-dark">相关内容</div>
-                {foreach $relations as $vo}
+                {foreach $relations??[] as $vo}
                 <div class="mb-3 pb-3 d-flex">
                     <div>▪</div>
                     <div class="ms-2">
                         <div class="mb-2">
-                            <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                            <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                         </div>
                         <div class="text-muted" style="font-size:.8em;">
                             {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次
@@ -70,11 +81,10 @@ $site = [
                 </div>
                 {/foreach}
             </div>
-            {/if}
 
             <div class="mb-3 bg-light p-3">
                 <?php
-                $contents = $container->get(\App\Ebcms\CmsAdmin\Model\Content::class)->select('ebcms_cms_content','*', [
+                $contents = $db->select('ebcms_cms_content', '*', [
                     'category_id' => $category['_cids'],
                     'state' => 1,
                     'LIMIT' => 5,
@@ -89,7 +99,7 @@ $site = [
                     <div>▪</div>
                     <div class="ms-2">
                         <div class="mb-2">
-                            <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                            <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                         </div>
                         <div class="text-muted" style="font-size:.8em;">
                             {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次

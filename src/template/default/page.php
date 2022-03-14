@@ -10,7 +10,7 @@ $site = [
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb d-print-none">
             <li>当前位置：</li>
-            <li class="breadcrumb-item"><a href="{:$router->build('/')}">主页</a></li>
+            <li class="breadcrumb-item"><a href="{echo $router->build('/')}">主页</a></li>
             <li class="breadcrumb-item active">{$category.title}</li>
         </ol>
     </nav>

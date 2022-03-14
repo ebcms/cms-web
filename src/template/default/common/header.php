@@ -32,7 +32,7 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 d-print-none">
         <div class="container-xxl">
-            <a class="navbar-brand" href="{:$router->build('/')}">首页</a>
+            <a class="navbar-brand" href="{echo $router->build('/')}">首页</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,20 +51,20 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown{$vo.id}">
                             {foreach $categorys as $_sub}
                             {if $_sub['state']==1 && $_sub['nav']==1 && $_sub['pid']==$vo['id']}
-                            <li><a class="dropdown-item" href="{$router->build('/ebcms/cms-web/category', ['id'=>$_sub['id']])}">{$_sub.title}</a></li>
+                            <li><a class="dropdown-item" href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$_sub['id']])}">{$_sub.title}</a></li>
                             {/if}
                             {/foreach}
                         </ul>
                     </li>
                     {else}
                     <li class="nav-item">
-                        <a class="nav-link" href="{$router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a>
+                        <a class="nav-link" href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a>
                     </li>
                     {/if}
                     {/if}
                     {/foreach}
                 </ul>
-                <form class="d-flex ms-auto" action="{:$router->build('/ebcms/cms-web/search')}">
+                <form class="d-flex ms-auto" action="{echo $router->build('/ebcms/cms-web/search')}">
                     <input class="form-control me-2" type="search" name="q" placeholder="搜索" aria-label="Search">
                     <button class="btn btn-primary text-nowrap" type="submit">搜索</button>
                 </form>

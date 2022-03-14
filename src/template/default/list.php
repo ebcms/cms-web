@@ -10,9 +10,9 @@ $site = [
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li>当前位置：</li>
-            <li class="breadcrumb-item"><a href="{:$router->build('/')}">主页</a></li>
+            <li class="breadcrumb-item"><a href="{echo $router->build('/')}">主页</a></li>
             {foreach $category['_pitems'] as $vo}
-            {if $vo['type']!='group'}<li class="breadcrumb-item"><a href="{$router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a></li>{/if}
+            {if $vo['type']!='group'}<li class="breadcrumb-item"><a href="{echo $router->build('/ebcms/cms-web/category', ['id'=>$vo['id']])}">{$vo.title}</a></li>{/if}
             {/foreach}
             <li class="breadcrumb-item active">{$category.title}</li>
         </ol>
@@ -31,9 +31,9 @@ $site = [
                 <dl>
                     <dt class="mb-2">{$_label}</dt>
                     <dd>
-                        <a href="{$router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], $_name => null, 'page'=>null]))}" class="badge rounded-pill {if $request->get($_name)==''}bg-dark text-white{else}bg-light text-dark{/if}">不限</a>
+                        <a href="{echo $router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], $_name => null, 'page'=>null]))}" class="badge rounded-pill {if $request->get($_name)==''}bg-dark text-white{else}bg-light text-dark{/if}">不限</a>
                         {foreach explode('|', $_items) as $_it}
-                        <a href="{$router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], $_name => $_it, 'page'=>null]))}" class="badge rounded-pill {if $request->get($_name)==$_it}bg-dark text-white{else}bg-light text-dark{/if}">{$_it}</a>
+                        <a href="{echo $router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], $_name => $_it, 'page'=>null]))}" class="badge rounded-pill {if $request->get($_name)==$_it}bg-dark text-white{else}bg-light text-dark{/if}">{$_it}</a>
                         {/foreach}
                     </dd>
                 </dl>
@@ -57,7 +57,7 @@ $site = [
                 <div>▪</div>
                 <div class="ms-2">
                     <div class="mb-2">
-                        <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}<span class="text-danger">[顶]</span></a>
+                        <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}<span class="text-danger">[顶]</span></a>
                     </div>
                     <div class="text-muted" style="font-size:.8em;">
                         {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次
@@ -101,7 +101,7 @@ $site = [
                 <div>▪</div>
                 <div class="ms-2">
                     <div class="mb-2">
-                        <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                        <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                     </div>
                     <div class="text-muted" style="font-size:.8em;">
                         {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次
@@ -118,7 +118,7 @@ $site = [
                     {elseif isset($v['current'])}
                     <li class="page-item active"><a class="page-link" href="javascript:void(0);">{$v.page}</a></li>
                     {else}
-                    <li class="page-item"><a class="page-link" href="{$router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], 'page'=>$v['page']]))}">{$v.page}</a></li>
+                    <li class="page-item"><a class="page-link" href="{echo $router->build('/ebcms/cms-web/category', array_merge($request->get(), ['id'=>$category['id'], 'page'=>$v['page']]))}">{$v.page}</a></li>
                     {/if}
                     {/foreach}
                 </ul>
@@ -142,7 +142,7 @@ $site = [
                     <div>▪</div>
                     <div class="ms-2">
                         <div class="mb-2">
-                            <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                            <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                         </div>
                         <div class="text-muted" style="font-size:.8em;">
                             {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次

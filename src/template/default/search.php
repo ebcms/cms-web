@@ -12,8 +12,8 @@ $site = [
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li>当前位置：</li>
-                    <li class="breadcrumb-item"><a href="{:$router->build('/')}">主页</a></li>
-                    <li class="breadcrumb-item"><a href="{$router->build('/ebcms/cms-web/search')}">搜索</a></li>
+                    <li class="breadcrumb-item"><a href="{echo $router->build('/')}">主页</a></li>
+                    <li class="breadcrumb-item"><a href="{echo $router->build('/ebcms/cms-web/search')}">搜索</a></li>
                 </ol>
             </nav>
             <div class="my-4">
@@ -42,13 +42,13 @@ $site = [
                     'body[~]' => '%' . $request->get('q') . '%',
                 ]
             ];
-            $total = $container->get(\App\Ebcms\CmsAdmin\Model\Content::class)->count('ebcms_cms_content', $where);
+            $total = $db->count('ebcms_cms_content', $where);
 
             $page = $request->get('page', 1, ['intval']) ?: 1;
             $page_num = 20;
             $where['LIMIT'] = [($page - 1) * $page_num, $page_num];
 
-            $contents = $container->get(\App\Ebcms\CmsAdmin\Model\Content::class)->select('ebcms_cms_content', '*', $where);
+            $contents = $db->select('ebcms_cms_content', '*', $where);
             $pagination = $container->get(\DigPHP\Pagination\Pagination::class)->render($page, $total, $page_num);
             ?>
 
@@ -58,7 +58,7 @@ $site = [
                     <div>▪</div>
                     <div class="ms-2">
                         <div class="mb-2">
-                            <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                            <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                         </div>
                         <div class="text-muted" style="font-size:.8em;">
                             {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次
@@ -76,7 +76,7 @@ $site = [
                     {elseif isset($v['current'])}
                     <li class="page-item active"><a class="page-link" href="javascript:void(0);">{$v.page}</a></li>
                     {else}
-                    <li class="page-item"><a class="page-link" href="{:$router->build('/ebcms/cms-web/search', array_merge($_GET, ['page'=>$v['page']]))}">{$v.page}</a></li>
+                    <li class="page-item"><a class="page-link" href="{echo $router->build('/ebcms/cms-web/search', array_merge($_GET, ['page'=>$v['page']]))}">{$v.page}</a></li>
                     {/if}
                     {/foreach}
                 </ul>
@@ -86,7 +86,7 @@ $site = [
         <div class="col-md-3">
             <div class="mb-3 bg-light p-3">
                 <?php
-                $contents = $container->get(\App\Ebcms\CmsAdmin\Model\Content::class)->select('ebcms_cms_content', '*', [
+                $contents = $db->select('ebcms_cms_content', '*', [
                     'state' => 1,
                     'LIMIT' => 5,
                     'ORDER' => [
@@ -100,7 +100,7 @@ $site = [
                     <div>▪</div>
                     <div class="ms-2">
                         <div class="mb-2">
-                            <a href="{$router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
+                            <a href="{echo $router->build('/ebcms/cms-web/content', ['category_id'=>$vo['category_id'], 'id'=>$vo['id']])}" class="text-dark fw-light h5">{$vo.title}</a>
                         </div>
                         <div class="text-muted" style="font-size:.8em;">
                             {:date('Y-m-d H:i:s', $vo['create_time'])} 浏览 {$vo.click} 次

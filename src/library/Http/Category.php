@@ -13,8 +13,8 @@ class Category extends Common
 {
 
     public function get(
-        ModelCategory $categoryModel,
         Request $request,
+        ModelCategory $categoryModel,
         Template $template
     ) {
         if (!$category = $categoryModel->getOne($request->get('id'))) {

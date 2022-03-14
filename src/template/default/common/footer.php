@@ -5,7 +5,7 @@
             <div class="mb-2">Copyright ©1998-{:date('Y')}&nbsp;{$config->get('site.name@ebcms/web')} All Rights Reserved. 版权所有 侵权必究</div>
             <div class="mb-2"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{$config->get('site.beian@ebcms/web')}</a></div>
             <div class="mb-2"><img src="https://static.ebcms.com/love.gif"></div>
-            <div class="mb-2">Powered By <a href="http://www.ebcms.com" target="_blank">EBCMS</a>. <a href="{$router->build('/ebcms/admin/index')}" class="text-muted ms-1">进入后台</a></div>
+            <div class="mb-2">Powered By <a href="http://www.ebcms.com" target="_blank">EBCMS</a>. <a href="{echo $router->build('/ebcms/admin/index')}" class="text-muted ms-1">进入后台</a></div>
         </div>
     </div>
 </div>
