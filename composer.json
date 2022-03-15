@@ -3,7 +3,8 @@
     "description": "ebcms cms web端",
     "license": "GPL-3.0",
     "require": {
-        "ebcms/cms-admin": "^1.0"
+        "ebcms/cms-admin": "^1.0",
+        "ebcms/web": "^1.0"
     },
     "autoload": {
         "psr-4": {
