@@ -10,5 +10,8 @@
         "psr-4": {
             "App\\Ebcms\\CmsWeb\\": "src/library/"
         }
+    },
+    "extra": {
+        "title": "CMS - Web端"
     }
 }
