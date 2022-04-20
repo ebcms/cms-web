@@ -9,8 +9,8 @@ use App\Ebcms\CmsWeb\Http\Category;
 use App\Ebcms\CmsWeb\Http\Content;
 use App\Ebcms\CmsWeb\Http\Index;
 use App\Ebcms\CmsWeb\Http\Search;
-use DigPHP\Framework\AppInterface;
-use DigPHP\Framework\Framework;
+use Ebcms\Framework\AppInterface;
+use Ebcms\Framework\Framework;
 use Psr\SimpleCache\CacheInterface;
 
 class App implements AppInterface
