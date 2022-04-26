@@ -6,9 +6,9 @@ namespace App\Ebcms\CmsWeb\Http;
 
 use App\Ebcms\CmsAdmin\Model\Category;
 use App\Ebcms\Web\Http\Common;
-use DigPHP\Database\Db;
-use DigPHP\Request\Request;
-use DigPHP\Template\Template;
+use DiggPHP\Database\Db;
+use DiggPHP\Request\Request;
+use DiggPHP\Template\Template;
 
 class Content extends Common
 {

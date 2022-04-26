@@ -94,7 +94,7 @@ $site = [
             $where['LIMIT'] = [($page - 1) * $page_num, $page_num];
 
             $contents = $db->select('ebcms_cms_content', '*', $where);
-            $pagination = $container->get(\DigPHP\Pagination\Pagination::class)->render($page, $total, $page_num);
+            $pagination = $container->get(\DiggPHP\Pagination\Pagination::class)->render($page, $total, $page_num);
             ?>
             {foreach $contents as $vo}
             <div class="mb-3 pb-3 d-flex">

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Ebcms\CmsWeb\Http;
 
 use App\Ebcms\Web\Http\Common;
-use DigPHP\Template\Template;
+use DiggPHP\Template\Template;
 
 class Search extends Common
 {

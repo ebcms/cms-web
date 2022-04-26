@@ -6,8 +6,8 @@ namespace App\Ebcms\CmsWeb\Http;
 
 use App\Ebcms\CmsAdmin\Model\Category as ModelCategory;
 use App\Ebcms\Web\Http\Common;
-use DigPHP\Request\Request;
-use DigPHP\Template\Template;
+use DiggPHP\Request\Request;
+use DiggPHP\Template\Template;
 
 class Category extends Common
 {
